@@ -1,0 +1,21 @@
+:root{
+    --surface : #ffffff;
+    --surface-soft: #f1f5f9;
+    --text: #172033;
+    --text-muted: #475569;
+    --border:  #cbd5e1;
+    --accent: #075985;
+
+    --status-afazer: #075985;
+    --status-andamento: #f8f553;
+    --status-revisao: #6b21a8;
+    --status-concluida: #166534;
+
+    --space-1 : 0.5rem;
+    --space-2: 1rem;
+    --space-3: 1.5rem;
+    --space-4: 2rem;
+    --radius: 0.75rem;
+    --shadow: 0 0.25rem 0.9rem rgb(15 23 42 / 0.08);
+
+}
