@@ -47,7 +47,13 @@ footer {
 }
 
 header{
-    padding-block: clamp(1.5rem , 4vw, 3rem);
+    padding-block: clamp(1.5rem, 4vw, 3rem);
+    background: var(--surface);
+    border-radius: var(--radius);
+    margin-bottom: var(--space-2);
+    box-shadow: var(--shadow);
+    text-align: center;
+    border: 1px solid var(--border);
 }
 
 h1,
@@ -60,11 +66,13 @@ p{
 h1{
     font-size: clamp(1.75rem, 5vw + 0.5rem, 3rem);
     line-height: 1.1;
+    color: var(--text);
 }
 
 h2{
     font-size: 1.25rem;
     line-height: 1.2;
+    margin-bottom: var(--space-2);
 }
 
 h3{
@@ -80,7 +88,7 @@ main{
 }
 
 main > section:first-child{
-    
+
     display: grid;
     gap: var(--space-2);
     padding: var(--space-2);
@@ -89,3 +97,155 @@ main > section:first-child{
     border-radius: var(--radius);
     box-shadow: var(--shadow);
 }
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    min-width: 0;
+}
+
+form > div:first-child{
+    display: grid;
+    gap: var(--space-1);
+}
+
+label,
+legend {
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+input[type="search"] {
+    width: 100%;
+    min-height: 2.75rem;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    background: var(--surface);
+    color: var(--text);
+    font: inherit;
+}
+
+input[type="search"]:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(7, 89, 133, 0.15);
+}
+
+fieldset {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-2);
+    min-width: 0;
+    margin: 0;
+    padding: var(--space-2);
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+}
+
+fieldset legend{
+    padding: 0 var(--space-1);
+}
+
+fieldset > div{
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 2.75rem;
+}
+
+input[type="radio"] {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin: 0;
+    accent-color: var(--accent);
+    flex-shrink: 0;
+}
+
+button {
+    min-height: 2.75rem;
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--accent);
+    border-radius: 0.5rem;
+    background: var(--accent);
+    color: #ffffff;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+button:hover {
+    background: #064a6b;
+}
+
+main > section:not(:first-child){
+    --status-color: var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    min-width: 0;
+    padding: var(--space-2);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);    
+}
+
+#status-afazer {
+    --status-color: var(--status-afazer);
+}
+#status-andamento {
+    --status-color: var(--status-andamento);
+}
+#status-em-revisao {
+    --status-color: var(--status-revisao);
+}
+#status-concluida {
+    --status-color: var(--status-concluida);
+}
+
+section[aria-labelledby="status-afazer"] li {
+    border-left-color: var(--status-afazer);
+}
+section[aria-labelledby="status-andamento"] li {
+    border-left-color: var(--status-andamento);
+}
+section[aria-labelledby="status-em-revisao"] li {
+    border-left-color: var(--status-revisao);
+}
+section[aria-labelledby="status-concluida"] li {
+    border-left-color: var(--status-concluida);
+}
+
+
+main > section:not(:first-child) {
+    --status-color: var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    min-width: 0;
+    padding: var(--space-2);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 0.3rem solid var(--status-color);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+main > section:not(:first-child) > ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+main > section:not(:first-child) li {
+    display: flex;
+    min-width: 0;
+}
+
