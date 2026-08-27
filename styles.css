@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Manrope:wght@500;600;700;800&display=swap');
 *,
 * ::before,
 * ::after {
@@ -13,7 +14,7 @@ body {
     margin: 0;
     background: var(--surface-soft);
     color: var(--text);
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-family: Manrope, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     font-size: 1rem;
     line-height: 1.5;
 }
@@ -21,13 +22,13 @@ body {
 /*propriedades personalizadas*/
 :root{
     --surface : #ffffff;
-    --surface-soft: #f1f5f9;
+    --surface-soft: #d4e7fa;
     --text: #172033;
     --text-muted: #475569;
     --border:  #cbd5e1;
     --accent: #075985;
 
-    --status-afazer: #075985;
+    --status-afazer: #cc6032;
     --status-andamento: #f8f553;
     --status-revisao: #6b21a8;
     --status-concluida: #166534;
@@ -49,6 +50,7 @@ footer {
 }
 
 header{
+
     padding-block: clamp(1.5rem, 4vw, 3rem);
     background: var(--surface);
     border-radius: var(--radius);
@@ -57,6 +59,7 @@ header{
     text-align: center;
     border: 1px solid var(--border);
 }
+
 
 h1,
 h2,
@@ -95,11 +98,28 @@ main > section:first-child{
 
     display: grid;
     gap: var(--space-2);
+    min-width: 0;
     padding: var(--space-2);
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
+}
+
+main > section:first-child h2 {
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: var(--space-1);
+    margin-bottom: var(--space-1);
+    color: var(--text);
+    font-size: 1.05rem;
+    font-weight: 800;
+}
+
+main > section:first-child h2::before {
+    margin-right: 0.55rem;
+    color: var(--accent);
+    font-family: "IBM Plex Mono", monospace;
 }
 
 form{
@@ -116,8 +136,18 @@ form > div:first-child{
 
 label,
 legend {
+    color: var(--text);
     font-weight: 700;
     font-size: 0.95rem;
+}
+
+form > div:first-child label,
+legend {
+    color: var(--text-muted);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
 }
 
 input[type="search"] {
@@ -129,6 +159,7 @@ input[type="search"] {
     background: var(--surface);
     color: var(--text);
     font: inherit;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 input[type="search"]:focus {
@@ -160,14 +191,16 @@ fieldset > div{
 }
 
 input[type="radio"] {
-    width: 1.25rem;
-    height: 1.25rem;
+    width: 1.15rem;
+    height: 1.15rem;
     margin: 0;
     accent-color: var(--accent);
     flex-shrink: 0;
 }
 
-button {
+
+
+button[type="submit"] {
     min-height: 2.75rem;
     padding: 0.5rem 1rem;
     border: 2px solid var(--accent);
@@ -178,11 +211,14 @@ button {
     font-weight: 700;
     cursor: pointer;
     transition: background-color 0.2s, transform 0.1s;
+    align-self: flex-start;
 }
 
-button:hover {
+button[type="submit"]:hover {
     background: #064a6b;
+    box-shadow: 0 0.5rem 1rem rgb(11 107 104 / 0.18);
 }
+
 
 main > section:not(:first-child){
     --status-color: var(--border);
@@ -193,50 +229,49 @@ main > section:not(:first-child){
     padding: var(--space-2);
     background: var(--surface);
     border: 1px solid var(--border);
+    border-top: 0.3rem solid var(--status-color);
     border-radius: var(--radius);
     box-shadow: var(--shadow);    
 }
 
-#status-afazer {
+
+main > section[aria-labelledby="status-afazer"] {
     --status-color: var(--status-afazer);
 }
-#status-andamento {
+
+main > section[aria-labelledby="status-andamento"] {
     --status-color: var(--status-andamento);
 }
-#status-em-revisao {
+
+main > section[aria-labelledby="status-em-revisao"] {
     --status-color: var(--status-revisao);
 }
-#status-concluida {
-    --status-color: var(--status-concluida);
-}
 
-section[aria-labelledby="status-afazer"] li {
-    border-left-color: var(--status-afazer);
-}
-section[aria-labelledby="status-andamento"] li {
-    border-left-color: var(--status-andamento);
-}
-section[aria-labelledby="status-em-revisao"] li {
-    border-left-color: var(--status-revisao);
-}
-section[aria-labelledby="status-concluida"] li {
-    border-left-color: var(--status-concluida);
+main > section[aria-labelledby="status-concluida"] {
+    --status-color: var(--status-concluida);
 }
 
 
 /*coluna do quadro*/
-main > section:not(:first-child) {
-    --status-color: var(--border);
+main > section:not(:first-child) > h2 {
+    color: var(--status-color);
+    border-bottom: 2px solid var(--border);
+    padding-bottom: var(--space-1);
+    margin-bottom: var(--space-2);
     display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-    min-width: 0;
-    padding: var(--space-2);
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-top: 0.3rem solid var(--status-color);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
+    align-items: center;
+    gap: var(--space-1);
+}
+
+main > section:not(:first-child) > h2::before {
+    content: '';
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--status-color);
+    box-shadow: 0 0 0 0.25rem color-mix(in srgb, var(--status-color) 15%, transparent);
+    flex: 0 0 auto;
 }
 
 main > section:not(:first-child) > ul {
@@ -247,6 +282,7 @@ main > section:not(:first-child) > ul {
     margin: 0;
     padding: 0;
     list-style: none;
+    flex: 1;
 }
 
 main > section:not(:first-child) li {
@@ -265,8 +301,9 @@ article{
     padding: var(--space-2);
     border: 1px solid var(--border);
     border-radius: 0.65rem;
-    background: var(--surface);
-    transition: box-shadow 0.2s;
+    box-shadow: 0 0.2rem 0.7rem rgb(19 38 50 / 0.035);
+    transition: transform 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out);
+    border-left: 4px solid var(--status-color);
 }
 
 article:hover{
@@ -279,6 +316,7 @@ article h3 {
     text-overflow: ellipsis;
     white-space: nowrap;
     color: var(--text);
+    margin-bottom: var(--space-1);
 }
 
 article p {
@@ -288,21 +326,132 @@ article p {
     display: flex;
     align-items: baseline;
     gap: 0.25rem;
+    font-size: 0.9rem;
 }
 
-.card-priority {
-    align-self: flex-start;
-    padding: 0.2rem 0.5rem;
-    border-radius: 999px;
-    background: var(--surface-soft);
+article p strong {
+    font-weight: 500;
     color: var(--text);
-    font-size: 0.9rem;
+}
+
+article .card-priority {
+    align-self: flex-start;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    background: var(--border);
+    color: var(--text);
+    font-size: 0.85rem;
     font-weight: 700;
     margin-top: var(--space-1);
 }
 
-.card-deadline {
+article .card-deadline {
     margin-top: auto;
     padding-top: var(--space-1);
 }
 
+footer{
+    padding-block: 0 var(--space-3);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    text-align: center;
+    border-top: 1px solid var(--border);
+    margin-top: var(--space-3);
+    padding-top: var(--space-2);
+}
+
+footer p + p{
+    margin-top: var(--space-1);
+}
+
+:where(a, button, input, label):focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 0.2rem;
+    border-radius: 0.25rem;
+}
+
+/* Ponto de quebra: 48rem.
+   Porque abaixo disso, quatro colunas ficam estreitas demais para títulos, cartões e filtros. 
+   Acima, quatro colunas lado a lado ficam legíveis sem criar rolagem horizontal.
+    */
+@media (min-width: 48rem) {
+    body {
+        padding: var(--space-3);
+    }
+
+    main {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-3);
+    }
+
+    main > section:first-child {
+        grid-column: 1 / -1;
+        padding: var(--space-3);
+    }
+
+    form {
+        display: grid;
+        grid-template-columns: minmax(12rem, 1.3fr) minmax(12rem, 1fr) minmax(10rem, 1fr) auto;
+        align-items: end;
+        gap: var(--space-2);
+    }
+
+    fieldset {
+        min-height: 100%;
+    }
+
+    button[type="submit"] {
+        align-self: end;
+    }
+}
+
+/* PONTO DE QUEBRA : 64rem
+   Porque a partir deste tamanho cabe 3 colunas confortáveis
+   sem apertar os cartões e com espaço suficiente para os títulos. */
+@media (min-width: 64rem) {
+    main {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: var(--space-3);
+    }
+
+    main > section:first-child {
+        grid-column: 1 / -1;
+    }
+}
+/* PONTO DE QUEBRA : 80rem 
+   Justificativa: em telas grandes, todas as 4 colunas cabem lado a lado
+   com largura suficiente para os cartões não ficarem muito estreitos. */
+@media (min-width: 80rem) {
+    main {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: var(--space-4);
+    }
+
+    main > section:first-child {
+        grid-column: 1 / -1;
+        padding: var(--space-4);
+    }
+
+    main > section:not(:first-child) {
+        padding: var(--space-3);
+    }
+
+    body {
+        padding: var(--space-4);
+    }
+}
+
+/* PONTO DE QUEBRA : 100rem 
+   Porque em telas muito largas, limitamos a largura máxima
+   para evitar que o conteúdo fique muito espalhado. */
+@media (min-width: 100rem) {
+    header,
+    main,
+    footer {
+        width: min(100% - 4rem, 100rem);
+    }
+
+    main {
+        gap: var(--space-4);
+    }
+}
