@@ -239,17 +239,21 @@ main > section[aria-labelledby="status-afazer"] {
     --status-color: var(--status-afazer);
 }
 
+/* Cor do status Em andamento */
 main > section[aria-labelledby="status-andamento"] {
     --status-color: var(--status-andamento);
 }
 
+/* Cor do status Em revisão */
 main > section[aria-labelledby="status-em-revisao"] {
     --status-color: var(--status-revisao);
 }
 
+/* Cor do status Concluída */
 main > section[aria-labelledby="status-concluida"] {
     --status-color: var(--status-concluida);
 }
+
 
 
 /*coluna do quadro*/
@@ -303,7 +307,7 @@ article{
     border-radius: 0.65rem;
     box-shadow: 0 0.2rem 0.7rem rgb(19 38 50 / 0.035);
     transition: transform 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out);
-    border-left: 4px solid var(--status-color);
+    border-left: 4px solid var(--status-color); 
 }
 
 article:hover{
@@ -455,7 +459,7 @@ footer p + p{
         gap: var(--space-4);
     }
 
-/* ============================================
+    /* ============================================
    ESTADOS DA APLICAÇÃO (Carregando, Erro, Vazio)
    ============================================ */
 
