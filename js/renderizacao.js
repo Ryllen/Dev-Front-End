@@ -1,100 +1,118 @@
+const listasPorStatus = {
 
-/**
- * Renderiza as tarefas no quadro de acordo com o status
- * @param {Array} tarefas - Array de tarefas a serem renderizadas
- */
-export function renderizarTarefas(tarefas) {
-    // Limpa as colunas existentes (mantém a seção de busca)
-    const main = document.querySelector('main');
-    const sections = main.querySelectorAll('section:not(:first-child)');
-    sections.forEach(section => section.remove());
+    "a-fazer": "#lista-afazer",
 
-    // Agrupa tarefas por status
-    const tarefasPorStatus = {
-        'a-fazer': [],
-        'em-andamento': [],
-        'em-revisao': [],
-        'concluida': []
-    };
+    "em-andamento": "#lista-andamento",
 
-    tarefas.forEach(tarefa => {
-        if (tarefasPorStatus[tarefa.status]) {
-            tarefasPorStatus[tarefa.status].push(tarefa);
-        }
-    });
+    "em-revisao": "#lista-revisao",
 
-    // Renderiza cada coluna
-    Object.keys(tarefasPorStatus).forEach(status => {
-        const tarefasStatus = tarefasPorStatus[status];
-        const coluna = criarColuna(status, tarefasStatus);
-        main.appendChild(coluna);
-    });
+    "concluida": "#lista-concluida"
+
+};
+
+
+function criarCard(tarefa) {
+
+    const li =
+        document.createElement("li");
+
+
+    const article =
+        document.createElement("article");
+
+
+    article.dataset.tarefaId =
+        tarefa.id;
+
+
+    const titulo =
+        document.createElement("h3");
+
+    titulo.textContent =
+        tarefa.titulo;
+
+
+    const projeto =
+        document.createElement("p");
+
+    projeto.innerHTML =
+        `<strong>Projeto:</strong> ${tarefa.projeto}`;
+
+
+    const responsavel =
+        document.createElement("p");
+
+    responsavel.innerHTML =
+        `<strong>Responsável:</strong> ${tarefa.responsavel}`;
+
+
+    const prazo =
+        document.createElement("p");
+
+    prazo.className =
+        "card-deadline";
+
+    prazo.innerHTML =
+        `<strong>Prazo:</strong> ${tarefa.prazo}`;
+
+
+    const prioridade =
+        document.createElement("p");
+
+    prioridade.className =
+        "card-priority";
+
+    prioridade.textContent =
+        `Prioridade: ${tarefa.prioridade}`;
+
+
+    article.append(
+        titulo,
+        projeto,
+        responsavel,
+        prazo,
+        prioridade
+    );
+
+
+    li.appendChild(article);
+
+
+    return li;
 }
 
-/**
- * Cria uma coluna de tarefas para um status específico
- * @param {string} status - Status da coluna
- * @param {Array} tarefas - Tarefas da coluna
- * @returns {HTMLElement} Elemento section da coluna
- */
-function criarColuna(status, tarefas) {
-    const section = document.createElement('section');
-    section.setAttribute('aria-labelledby', `status-${status}`);
-    section.id = `status-${status}`;
 
-    const tituloMap = {
-        'a-fazer': 'A fazer',
-        'em-andamento': 'Em andamento',
-        'em-revisao': 'Em revisão',
-        'concluida': 'Concluída'
-    };
+export function renderizarTarefas(tarefas) {
 
-    const h2 = document.createElement('h2');
-    h2.id = `status-${status}`;
-    h2.textContent = tituloMap[status] || status;
-    section.appendChild(h2);
+    Object.values(listasPorStatus)
+        .forEach(seletor => {
 
-    const ul = document.createElement('ul');
+            const lista =
+                document.querySelector(seletor);
+
+            lista.replaceChildren();
+
+        });
+
 
     tarefas.forEach(tarefa => {
-        const li = document.createElement('li');
-        const article = document.createElement('article');
 
-        // Título
-        const h3 = document.createElement('h3');
-        h3.textContent = tarefa.titulo;
-        article.appendChild(h3);
+        const seletor =
+            listasPorStatus[tarefa.status];
 
-        // Projeto
-        if (tarefa.projeto) {
-            const pProjeto = document.createElement('p');
-            pProjeto.innerHTML = `<strong>Projeto:</strong> ${tarefa.projeto}`;
-            article.appendChild(pProjeto);
+
+        const lista =
+            document.querySelector(seletor);
+
+
+        if (lista) {
+
+            lista.appendChild(
+                criarCard(tarefa)
+            );
+
         }
 
-        // Responsável
-        if (tarefa.responsavel) {
-            const pResponsavel = document.createElement('p');
-            pResponsavel.innerHTML = `<strong>Responsável:</strong> ${tarefa.responsavel}`;
-            article.appendChild(pResponsavel);
-        }
-
-        // Prazo (com classe para base do cartão)
-        const pPrazo = document.createElement('p');
-        pPrazo.className = 'card-deadline';
-        pPrazo.innerHTML = `<strong>Prazo:</strong> ${tarefa.prazo}`;
-        article.appendChild(pPrazo);
-
-        // Prioridade (com classe para estilo badge)
-        const pPrioridade = document.createElement('p');
-        pPrioridade.className = 'card-priority';
-        pPrioridade.textContent = tarefa.prioridade;
-        article.appendChild(pPrioridade);
-
-        li.appendChild(article);
-        ul.appendChild(li);
     });
 
-    section.appendChild(ul);
-    return section;
 }
